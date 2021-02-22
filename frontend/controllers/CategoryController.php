@@ -27,12 +27,12 @@ class CategoryController extends AppController
         if(empty($category))
             throw new HttpException(404, 'Такой категории нет');
         $query = Product::find()->where(['category_id' => $id]);
-        $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'pageSizeParam' => false, 'forcePageParam' => false]);
-        $products = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'pageSizeParam' => false, 'forcePageParam' => false]);
+        $products = $query->offset($pagination->offset)->limit($pagination->limit)->all();
 
         $category = Category::findOne($id);
         $this->setMeta('Shop | ' . $category->name, $category->keywords, $category->description);
-        return $this->render('view', compact(['products', 'pages', 'category']));
+        return $this->render('view', compact(['products', 'pagination', 'category']));
     }
 
 }
