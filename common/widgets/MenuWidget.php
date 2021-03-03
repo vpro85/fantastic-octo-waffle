@@ -1,7 +1,6 @@
 <?php
 
 namespace common\widgets;
-
 use yii\base\Widget;
 use common\models\Category;
 use Yii;
@@ -40,7 +39,7 @@ class MenuWidget extends Widget
         // set cache
         if ($this->tpl == 'menu.php')
         {
-            Yii::$app->cache->set('menu', $this->menuHtml, 60);
+            Yii::$app->cache->set('menu', $this->menuHtml, 5);
         }
         return $this->menuHtml;
     }
