@@ -2,8 +2,6 @@
 
 /* @var $this yii\web\View */
 
-use common\widgets\MenuWidget;
-
 $this->title = 'My Yii Shop Application';
 ?>
 <div class="row">
