@@ -1,4 +1,5 @@
 <?php
+use common\widgets\MenuWidget;
 
 /* @var $this yii\web\View */
 
