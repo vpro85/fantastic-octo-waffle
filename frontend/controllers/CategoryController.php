@@ -25,7 +25,7 @@ class CategoryController extends AppController
     {
         $category = Category::findOne($id);
         if(empty($category))
-            throw new HttpException(404, 'Такой категории нет');
+            throw new HttpException(404, 'Category not found');
         $query = Product::find()->where(['category_id' => $id]);
         $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'pageSizeParam' => false, 'forcePageParam' => false]);
         $products = $query->offset($pagination->offset)->limit($pagination->limit)->all();
