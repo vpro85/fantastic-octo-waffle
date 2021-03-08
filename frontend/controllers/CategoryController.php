@@ -34,5 +34,4 @@ class CategoryController extends AppController
         $this->setMeta('Shop | ' . $category->name, $category->keywords, $category->description);
         return $this->render('view', compact(['products', 'pagination', 'category']));
     }
-
 }

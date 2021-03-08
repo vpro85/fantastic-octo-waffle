@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -40,7 +41,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/category/index']],
         ['label' => 'Checkout', 'url' => ['#']],
-        ['label' => 'Cart', 'url' => ['#']],
+        ['label' => 'Cart', 'url' => ['#'], 'linkOptions' => ['onClick' => 'getCart()']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -90,7 +91,15 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
+<?php
+Modal::begin([
+        'header' => 'Your cart',
+        'id' => 'cart',
+        'size' => 'modal-lg',
+        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Continue shopping</button>'
+]);
+Modal::end();
+?>
 <?php $this->endBody() ?>
 </body>
 </html>
