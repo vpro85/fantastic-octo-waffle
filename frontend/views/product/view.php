@@ -16,14 +16,14 @@ $this->title = "Product Description | $product->name";
         <div class="product-information">
             <h2><?= $product->name ?></h2>
             <span>
-									<span>US $<?= $product->price; ?></span>
-									<label>Quantity:</label>
-									<input type="text" value="1" id="qty">
-									<a href="#" data-id="2" class="btn btn-fefault add-to-cart cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</a>
-								</span>
+                <span>US $<?= $product->price; ?></span>
+                <label>Quantity:</label>
+                <input type="text" value="1" id="qty"/>
+                <a href="#" data-id="2" class="btn btn-fefault add-to-cart cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    Add to cart
+                </a>
+            </span>
             <p><b>Availability:</b> In Stock</p>
             <p><b>Condition:</b> New</p>
             <p><b>Description:</b> <?= $product->description ?></p>
