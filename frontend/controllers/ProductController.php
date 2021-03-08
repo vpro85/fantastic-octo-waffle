@@ -6,7 +6,7 @@ use common\models\Product;
 use yii\web\Controller;
 use yii\web\HttpException;
 
-class ProductController extends Controller
+class ProductController extends AppController
 {
     public function actionView($id)
     {

@@ -3,7 +3,7 @@
  $('#sl2').slider();
 
  	$('.catalog').dcAccordion({
-		speed: 300
+		speed: 200
 	});
 
  	function showCart(cart){
