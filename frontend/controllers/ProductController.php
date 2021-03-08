@@ -7,10 +7,10 @@ use yii\web\Controller;
 
 class ProductController extends Controller
 {
-    public function actionView()
+    public function actionView($id)
     {
-
-        return $this->render('view');
+        $product = Product::findOne($id);
+        return $this->render('view', compact('product'));
     }
 
 }

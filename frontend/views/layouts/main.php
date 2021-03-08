@@ -10,6 +10,8 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
+use common\widgets\MenuWidget;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -62,10 +64,22 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="row">
+            <div class="col-sm-3">
+                <h2>Category</h2>
+                <ul class="catalog category-products">
+                    <?= MenuWidget::widget(['tpl' => 'menu']) ?>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <!--  CONTENT      -->
+                <?= $content ?>
+                <!--  END OF CONTENT      -->
+            </div>
+        </div>
     </div>
 </div>
 
