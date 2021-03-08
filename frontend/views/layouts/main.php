@@ -5,6 +5,7 @@
 
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -40,8 +41,8 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/category/index']],
-        ['label' => 'Checkout', 'url' => ['#']],
-        ['label' => 'Cart', 'url' => ['#'], 'linkOptions' => ['onClick' => 'getCart()']],
+        ['label' => 'Checkout'],
+        ['label' => 'Cart', 'linkOptions' => ['onClick' => 'getCart()']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -93,10 +94,12 @@ AppAsset::register($this);
 </footer>
 <?php
 Modal::begin([
-        'header' => 'Your cart',
+        'header' => '<h2>Your cart</h2>',
         'id' => 'cart',
         'size' => 'modal-lg',
-        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Continue shopping</button>'
+        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Continue shopping</button>
+                        <a href="'. Url::to(['cart/view']) .'" class="btn btn-success">Make order</a>
+                        <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Cart</button>'
 ]);
 Modal::end();
 ?>
