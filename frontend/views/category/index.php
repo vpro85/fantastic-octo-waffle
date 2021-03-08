@@ -1,6 +1,7 @@
 <?php
 use common\widgets\MenuWidget;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
@@ -18,7 +19,7 @@ $this->title = 'My Yii Shop Application';
                                 <?= Html::img("/images/products/{$hit->img}", ['alt' => $hit->name]) ?>
                                 <h2>$<?= $hit->price; ?></h2>
                                 <p><?= yii\helpers\Html::a("$hit->name", ['/product/view', 'id' => $hit->id]); ?></p>
-                                <a href="#" data-id="1" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="<?= Url::to(['cart/add', 'id' => $hit->id]) ?>" data-id="<?= $hit->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </div>
                         </div>
                     </div>

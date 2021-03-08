@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = "Product Description | $product->name";
 ?>
@@ -19,7 +20,7 @@ $this->title = "Product Description | $product->name";
                 <span>US $<?= $product->price; ?></span>
                 <label>Quantity:</label>
                 <input type="text" value="1" id="qty"/>
-                <a href="#" data-id="2" class="btn btn-fefault add-to-cart cart">
+                <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-fefault add-to-cart cart">
                     <i class="fa fa-shopping-cart"></i>
                     Add to cart
                 </a>
