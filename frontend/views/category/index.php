@@ -6,14 +6,7 @@ use yii\helpers\Html;
 
 $this->title = 'My Yii Shop Application';
 ?>
-<div class="row">
-    <div class="col-sm-3">
-        <h2>Category</h2>
-        <ul class="catalog category-products">
-            <?= MenuWidget::widget(['tpl' => 'menu']) ?>
-        </ul>
-    </div>
-    <div class="col-sm-9">
+
         <?php if(!empty($hits)): ?>
             <div class="features_items">
                 <h2 class="text-center">Featured Products</h2>
