@@ -29,8 +29,6 @@ class CategoryController extends AppController
         $query = Product::find()->where(['category_id' => $id]);
         $pagination = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'pageSizeParam' => false, 'forcePageParam' => false]);
         $products = $query->offset($pagination->offset)->limit($pagination->limit)->all();
-
-        $category = Category::findOne($id);
         $this->setMeta('Shop | ' . $category->name, $category->keywords, $category->description);
         return $this->render('view', compact(['products', 'pagination', 'category']));
     }
