@@ -41,7 +41,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/category/index']],
-        ['label' => 'Checkout'],
+        ['label' => 'Checkout', 'url' => ['cart/view']],
         ['label' => 'Cart', 'linkOptions' => ['onClick' => 'getCart()']],
     ];
     if (Yii::$app->user->isGuest) {
