@@ -3,6 +3,8 @@
 
 namespace frontend\controllers;
 
+use common\models\OrderItems;
+use common\models\Orders;
 use frontend\models\Cart;
 use Yii;
 use common\models\Product;
@@ -56,6 +58,41 @@ class CartController extends AppController
 
     public function actionView()
     {
-        return $this->render('view');
+        $session = Yii::$app->session;
+        $session->open();
+        $this->setMeta('Your Cart');
+        $orders = new Orders();
+        if ($orders->load(Yii::$app->request->post())) {
+            $orders->qty = $session['cart.qty'];
+            $orders->sum = $session['cart.sum'];
+            if ($orders->save())
+            {
+                $this->saveOrderItems($session['cart'], $orders->id);
+                Yii::$app->session->setFlash('success', "Your order accepted! Our manager will contact you.");
+                $session->remove('cart');
+                $session->remove('cart.qty');
+                $session->remove('cart.sum');
+                return $this->refresh();
+            }
+            else {
+                Yii::$app->session->setFlash('error', 'There is an erroe while making order');
+            }
+        }
+        return $this->render('view', compact('session', 'orders'));
+    }
+
+    protected function saveOrderItems($items, $order_id)
+    {
+        foreach ($items as $id => $item)
+        {
+            $order_items = new OrderItems();
+            $order_items->order_id = $order_id;
+            $order_items->product_id = $id;
+            $order_items->name = $item['name'];
+            $order_items->price = $item['price'];
+            $order_items->qty_item = $item['qty'];
+            $order_items->sum_item = $item['price'] * $item['qty'];
+            $order_items->save();
+        }
     }
 }
