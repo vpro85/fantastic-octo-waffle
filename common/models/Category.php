@@ -7,6 +7,15 @@ use yii\db\ActiveRecord;
 
 class Category extends ActiveRecord
 {
+    public function rules()
+    {
+        return [
+          [['parent_id'], 'integer'],
+          [['name'], 'required'],
+          [['name', 'keywords', 'description'], 'string', 'max' => 255],
+        ];
+    }
+
     public static function tableName()
     {
         return 'category'; //
@@ -15,6 +24,11 @@ class Category extends ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::class(), ['category_id' => 'id']);
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'parent_id']);
     }
 
 }
