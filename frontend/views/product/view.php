@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
+use common\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -10,12 +11,13 @@ $this->title = "Product Description | $product->name";
 <div class="product-details">
     <div class="col-sm-5">
         <div class="view-product">
-            <?= Html::img("/images/products/{$product->img}", ['alt' => $product->name]) ?>
+            <?= Html::img("/images/products/{$product->img}", ['alt' => $product->name, 'width' => '100%']) ?>
         </div>
     </div>
     <div class="col-sm-7">
         <div class="product-information">
             <h2><?= $product->name ?></h2>
+            <h4><?= Category::findOne($product->category_id)['name'] ?></h4>
             <span>
                 <span>US $<?= $product->price; ?></span>
                 <label>Quantity:</label>

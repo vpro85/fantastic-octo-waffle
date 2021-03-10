@@ -17,4 +17,15 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::class(), ['id' => 'category_id']);
     }
 
+    public function rules()
+    {
+        return [
+            [['category_id', 'name'], 'required'],
+            [['category_id'], 'integer'],
+            [['content', 'hit', 'new', 'sale'], 'string'],
+            [['price'], 'number'],
+            [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
+        ];
+    }
+
 }
