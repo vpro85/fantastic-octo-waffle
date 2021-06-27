@@ -2,6 +2,7 @@
 
 
 namespace common\models;
+use rico\yii2images\behaviors\ImageBehave;
 use yii\db\ActiveRecord;
 
 
@@ -48,6 +49,25 @@ class Product extends ActiveRecord
         {
             $path = "files/store/" . $this->image->baseName . "." . $this->image->extension;
             $this->image->saveAs($path);
+            $this->attachImage($path, true);
+            @unlink($path);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadGallery()
+    {
+        if($this->validate())
+        {
+            foreach ($this->gallery as $file)
+            {
+                $path = "files/store/" . $file->baseName . "." . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                @unlink($path);
+            }
             return true;
         } else {
             return false;
