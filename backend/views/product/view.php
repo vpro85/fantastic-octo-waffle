@@ -32,14 +32,35 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'category_id',
             'name',
-            'content:ntext',
+            'content:raw',
             'price',
             'keywords',
             'description',
-            'img',
-            'hit',
-            'new',
-            'sale',
+//            'img',
+//            'hit',
+//            'new',
+            [
+                'attribute' => 'hit',
+                'value' => function($data){
+                    return !$data->hit ? '<span class="text-danger">No</span>' : '<span class="text-success">Yes</span>';
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'new',
+                'value' => function($data){
+                    return !$data->new ? '<span class="text-danger">No</span>' : '<span class="text-success">Yes</span>';
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'sale',
+                'value' => function($data){
+                    return !$data->sale ? '<span class="text-danger">No</span>' : '<span class="text-success">Yes</span>';
+                },
+                'format' => 'raw',
+            ],
+//            'sale',
         ],
     ]) ?>
 
