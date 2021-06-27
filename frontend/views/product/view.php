@@ -30,6 +30,8 @@ $this->title = "Product Description | $product->name";
             <p><b>Availability:</b> In Stock</p>
             <p><b>Condition:</b> New</p>
             <p><b>Description:</b> <?= $product->description ?></p>
+            <p></p>
+            <?= $product->content ?>
         </div><!--/product-information-->
     </div>
 </div>

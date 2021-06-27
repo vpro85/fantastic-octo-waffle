@@ -7,6 +7,18 @@ use yii\db\ActiveRecord;
 
 class Product extends ActiveRecord
 {
+    public $image;
+    public $gallery;
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     public static function tableName()
     {
         return 'product'; //
@@ -25,7 +37,21 @@ class Product extends ActiveRecord
             [['content', 'hit', 'new', 'sale'], 'string'],
             [['price'], 'number'],
             [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
+            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
+    }
+
+    public function upload()
+    {
+        if($this->validate())
+        {
+            $path = "files/store/" . $this->image->baseName . "." . $this->image->extension;
+            $this->image->saveAs($path);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

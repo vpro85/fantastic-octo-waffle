@@ -3,6 +3,9 @@
 use common\widgets\MenuWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
+mihaildev\elfinder\Assets::noConflict($this);
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -11,7 +14,7 @@ use yii\widgets\ActiveForm;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
 
         <select id="product-category_id" class="form-control" name="Product[category_id]" aria-invalid="false">
@@ -21,7 +24,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?php
+    echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    'editorOptions' => ElFinder::ckeditorOptions('elfinder', []),
+    ]);
+    ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 
@@ -29,13 +36,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'hit')->dropDownList(['0' => 'No', '1' => 'Yes']) ?>
+    <?= $form->field($model, 'hit')->checkbox(['0' => 'No', '1' => 'Yes']) ?>
 
-    <?= $form->field($model, 'new')->dropDownList(['0' => 'No', '1' => 'Yes']) ?>
+    <?= $form->field($model, 'new')->checkbox(['0' => 'No', '1' => 'Yes']) ?>
 
-    <?= $form->field($model, 'sale')->dropDownList(['0' => 'No', '1' => 'Yes']) ?>
+    <?= $form->field($model, 'sale')->checkbox(['0' => 'No', '1' => 'Yes']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
